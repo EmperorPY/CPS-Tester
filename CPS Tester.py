@@ -4,11 +4,7 @@ root = ctk.CTk()  # Create the main application window (the root window)
 root.title("CPS Tester")  # Set the title text that appears in the window's title bar
 ctk.set_appearance_mode("dark")  # Set the overall theme to dark mode (alternatives: "light", "system")
 
-screen_width = root.winfo_screenwidth()  # Get the width of the user's screen in pixels
-screen_height = root.winfo_screenheight()  # Get the height of the user's screen in pixels
-task_bar_height = 50  # Approximate height of the OS taskbar to subtract from the window height
-window_height = screen_height - task_bar_height  # Calculate window height so it fits above the taskbar
-root.geometry(f"{screen_width}x{window_height}+0+0")  # Set window size and position: full width, adjusted height, at top-left corner
+root.geometry("500x700+0+0")  # Set window size and position: full width, adjusted height, at top-left corner
 
 click_count = 0  # Global counter tracking how many times the user has clicked during the test
 game_active = False  # Global flag indicating whether a test is currently in progress (clicks only count when True)
@@ -51,7 +47,7 @@ def start_game():
         if test_duration <= 0:  # Reject zero or negative durations
             raise ValueError  # Raise an error to be caught by the except block below
     except ValueError:  # If conversion fails or value is invalid
-        label.configure(text="Please enter a valid positive number of seconds!")  # Show an error message to the user
+        label.configure(text="Please enter a valid positive number of seconds!", wraplength=300) # Show an error message to the user
         return  # Exit the function early so the game doesn't start
 
     game_active = True  # Mark the game as active so clicks will be counted
@@ -115,7 +111,7 @@ button = ctk.CTkButton(
     text="CLICK ME!",
     command=on_click,
     font=("Arial", 20),
-    height=250,
+    height=270,
     width=300,
     state="disabled"
 )  # The big button the user repeatedly clicks during the test (starts disabled)
